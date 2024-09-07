@@ -1,36 +1,47 @@
 #include <iostream>
-#include "course.hpp"
+#include "section.h"
+
 using namespace std;
 
-int main(int argc, char const *argv[])
+int main(int argc, char** argv) 
 {
-    Course* course = new Course("DSA");
-    Student* s;
-    char op;
+	char op;
+	Section section("BSCS 2 F1");
+	Student s;
+	int i;
+	
+	do
+	{
+		cout << "Enter operation: ";
+		cin >> op;
+		
+		cin.ignore();
+		
+		switch(op)
+		{
+			case 'a':
+				cout << "Enter name: ";
+				getline(cin, s.name);
+				cout << "Enter roll number: ";
+				cin >> s.rollNumber;
+				
+				cout << "Enter 5 grades:\n";
+				for (i = 0; i < 5; i++)
+					cin >> s.marks[i];	
+				section.addStudent(&s);
+				break;
+			
+			case 'p':
+				cout << "Printing..." << endl << endl;
+				section.printStudents();
+				break;
+			
+			case 'x':
+				return 0;
+		}
+		s = {};
+	} while (op != 'x');
+	
 
-    while (true) {
-        cout << "Op: ";
-        cin >> op;
-
-        switch (op) {
-            case 'a':                   // Add a new student
-                s = new Student;
-                cout << "Name: ";
-                cin >> s->name;
-                course->addStudent(s);
-                break;
-            case 'p':                   // Print the course details
-                course->print();
-                break;
-
-            case 'x':                   // Exit the loop
-                return 0;
-
-            default:
-                cout << "Invalid option." << endl;
-                break;
-        }
-    }
-
-    return 0;
+	return 0;
 }
