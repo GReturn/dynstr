@@ -1,11 +1,11 @@
 #include <iostream>
-#include <cstdio>
 #include "course.hpp"
 using namespace std;
 
 int main(int argc, char const *argv[])
 {
-    Course* csit = new Course("DSA");
+    Course* course = new Course("DSA");
+    Student* s;
     char op;
 
     while (true) {
@@ -13,20 +13,17 @@ int main(int argc, char const *argv[])
         cin >> op;
 
         switch (op) {
-            case 'a':
-            {
-                Student* s = new Student;
+            case 'a':                   // Add a new student
+                s = new Student;
                 cout << "Name: ";
                 cin >> s->name;
-                csit->addStudent(s);
+                course->addStudent(s);
+                break;
+            case 'p':                   // Print the course details
+                course->print();
                 break;
 
-            } // Add a new student
-            case 'p': // Print the course details
-                csit->print();
-                break;
-
-            case 'x': // Exit the loop
+            case 'x':                   // Exit the loop
                 return 0;
 
             default:
