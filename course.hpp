@@ -1,5 +1,4 @@
 #include <iostream>
-#include <string>
 using namespace std;
 
 struct Student {
@@ -11,7 +10,7 @@ struct Student {
 
 class Course {
     string name;
-    Student** students;
+    Student* students;
     int size;
     int capacity;
 
@@ -20,7 +19,7 @@ public:
         this->name = name;
         size = 0;
         capacity = 10;
-        students = (Student**)malloc(capacity * sizeof(Student));
+        students = (Student*)malloc(capacity * sizeof(Student));
         if (students == nullptr) {
             cout << "Memory allocation failed!" << endl;
             exit(1);
@@ -28,9 +27,9 @@ public:
         cout << "Allocated " << capacity << " slots for students." << endl;
     }
 
-    void addStudent(Student* s) {
-        cout << "Added\n";
-        students[size++] = s;
+    void addStudent(Student* student) {
+        cout << "Added"<< endl;
+        students[size++] = *student;
     }
 
     void print() {
@@ -38,7 +37,7 @@ public:
         for (int i = 0; i < capacity; i++) {
             cout << "Student " << i + 1 << ": ";
             if(i >= size) cout  << "?" << endl;
-            else cout  << students[i]->name << endl;
+            else cout  << students[i].name << endl;
         }
     }
 };
